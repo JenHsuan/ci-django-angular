@@ -1,5 +1,3 @@
-image: node:20-bullseye
-
 cache:
   key:
     files:
@@ -12,6 +10,7 @@ stages:
   - test
 
 unit test:
+  image: node:20-bullseye
   stage: test
   tags:
     - test
@@ -31,6 +30,7 @@ unit test:
       junit: unit-test-results.xml
 
 build:
+  image: node:20-bullseye
   stage: build
   tags:
     - docker
