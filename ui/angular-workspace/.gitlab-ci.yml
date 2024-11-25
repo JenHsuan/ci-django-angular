@@ -1,17 +1,6 @@
-cache:
-  key:
-    files:
-      - package-lock.json
-  paths:
-    - node_modules/
-
-stages:
-  - build
-  - test
-
 unit test:
   image: node:20-bullseye
-  stage: test
+  stage: test-frontend
   tags:
     - test
   before_script:
@@ -29,9 +18,16 @@ unit test:
     reports:
       junit: unit-test-results.xml
 
+  cache:
+    key:
+      files:
+        - package-lock.json
+    paths:
+      - node_modules/
+
 build:
   image: node:20-bullseye
-  stage: build
+  stage: build-frontend
   tags:
     - docker
   before_script:
@@ -40,3 +36,10 @@ build:
   script:
     - npm ci --legacy-peer-deps
     - npm run build
+
+  cache:
+    key:
+      files:
+        - package-lock.json
+    paths:
+      - node_modules/

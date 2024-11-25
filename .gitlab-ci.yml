@@ -1,9 +1,11 @@
 stages:
-  - test
+  - test-backend
+  - build-frontend
+  - test-frontend
 
 server test:
   image: python:3.9-slim
-  stage: test
+  stage: backend
   tags:
     - docker
   before_script:
