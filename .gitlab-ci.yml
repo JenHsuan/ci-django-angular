@@ -12,4 +12,4 @@ server test:
   script:
     - python3 -m pytest
 
-include: './ui/angular-workspace/.gitlab-ci.yml'
+include: '/ui/angular-workspace/.gitlab-ci.yml'
