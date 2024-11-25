@@ -1,0 +1,42 @@
+image: node:20-bullseye
+
+cache:
+  key:
+    files:
+      - package-lock.json
+  paths:
+    - node_modules/
+
+stages:
+  - build
+  - test
+
+unit test:
+  stage: test
+  tags:
+    - test
+  before_script:
+    - apt-get update
+    - wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+    - apt install -y ./google-chrome*.deb;
+    - export CHROME_BIN=/usr/bin/google-chrome
+    - npm install -g @angular/cli@^17.3.8
+
+  script:
+    - npm ci --legacy-peer-deps
+    - npm run test:ci
+
+  artifacts:
+    reports:
+      junit: unit-test-results.xml
+
+build:
+  stage: build
+  tags:
+    - docker
+  before_script:
+    - npm install -g @angular/cli@^17.3.8
+
+  script:
+    - npm ci --legacy-peer-deps
+    - npm run build
