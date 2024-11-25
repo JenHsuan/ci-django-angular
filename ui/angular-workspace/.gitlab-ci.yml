@@ -8,6 +8,7 @@ unit test:
     - wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
     - apt install -y ./google-chrome*.deb;
     - export CHROME_BIN=/usr/bin/google-chrome
+    - cd ui/angular-workspace
     - npm install -g @angular/cli@^17.3.8
 
   script:
@@ -31,6 +32,7 @@ build:
   tags:
     - docker
   before_script:
+    - cd ui/angular-workspace
     - npm install -g @angular/cli@^17.3.8
 
   script:
